@@ -1477,4 +1477,4 @@ public class FrmMain extends JFrame {
 			e.printStackTrace();
 		}
 	}
-}
+} // End of Class FrmMain
