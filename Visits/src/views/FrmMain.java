@@ -41,7 +41,13 @@ import com.toedter.calendar.JDateChooser;
 
 import utilities.*;
 import javax.swing.JSeparator;
-
+/**
+ * 
+ * @author nick
+ * Main class for Visits application
+ * It is the main form 
+ *
+ */
 public class FrmMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -1476,5 +1482,5 @@ public class FrmMain extends JFrame {
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-	}
+	} // End of method
 } // End of Class FrmMain
