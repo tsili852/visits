@@ -149,4 +149,4 @@ public class FrmPassword extends JDialog {
 		getContentPane().add(txtOldPassword);
 
 	}
-}
+}// End of Class FrmPassword
