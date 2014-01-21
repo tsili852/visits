@@ -86,7 +86,7 @@ public class FrmMain extends JFrame {
 	private JDateChooser dateChooserTo;
 	private JButton btnSearchClear;
 	private JLabel lblSearchStatus;
-	private ResultSetTable rsJT, rsJTStates, rsJTCompanies, rsJTUsers;
+	private ResultSetTable rsJT, rsJTStates, rsJTCompanies;
 	private JScrollPane tableScrollPane, statesScrollPane, companiesScrollPane;
 	private JButton btnDelete;
 	private String tempText;
@@ -110,14 +110,7 @@ public class FrmMain extends JFrame {
 	private JButton btnDeleteState;
 	private JLabel lblPropertiesStatesStatus;
 	private JLabel lblPropertiesCompStatus;
-	private JTextField txtUsersNewUser;
-	private JButton btnAddNewUser;
-	private JButton btnRefreshUsers;
-	private JButton btnDeleteUser;
-	private JScrollPane usersScrollPane;
-	private JLabel lblPropertiesUsersStatus;
 	static FrmMain frame;
-	private JPanel panelUsers;
 	private JTextField txtDbName;
 	private JButton btnUpdate;
 	private JTextPane txtDetailedDescription;
@@ -654,73 +647,33 @@ public class FrmMain extends JFrame {
 		lblCompanies.setBounds(262, 7, 63, 19);
 		panelProperties.add(lblCompanies);
 		
-		panelUsers = new JPanel();
-		panelUsers.setLayout(null);
-		panelUsers.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelUsers.setBounds(638, 26, 291, 257);
-		panelProperties.add(panelUsers);
-		
-		txtUsersNewUser = new JTextField();
-		txtUsersNewUser.setColumns(10);
-		txtUsersNewUser.setBounds(10, 11, 107, 22);
-		panelUsers.add(txtUsersNewUser);
-		
-		btnAddNewUser = new JButton("Add User");
-
-		btnAddNewUser.setForeground(Color.BLACK);
-		btnAddNewUser.setBackground(SystemColor.activeCaption);
-		btnAddNewUser.setBounds(127, 10, 105, 23);
-		panelUsers.add(btnAddNewUser);
-		
-		btnRefreshUsers = new JButton("Refresh Table");
-		btnRefreshUsers.setForeground(Color.BLACK);
-		btnRefreshUsers.setBackground(SystemColor.activeCaption);
-		btnRefreshUsers.setBounds(127, 44, 105, 23);
-		panelUsers.add(btnRefreshUsers);
-		
-		btnDeleteUser = new JButton("Delete User");
-		btnDeleteUser.setForeground(Color.RED);
-		btnDeleteUser.setBackground(Color.RED);
-		btnDeleteUser.setBounds(127, 74, 105, 23);
-		panelUsers.add(btnDeleteUser);
-		
-		lblPropertiesUsersStatus = new JLabel("");
-		lblPropertiesUsersStatus.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblPropertiesUsersStatus.setBounds(0, 241, 291, 16);
-		panelUsers.add(lblPropertiesUsersStatus);
-		
-		JLabel lblUsers = new JLabel("Users");
-		lblUsers.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblUsers.setBounds(638, 7, 59, 19);
-		panelProperties.add(lblUsers);
-		
 		JPanel panelOther = new JPanel();
 		panelOther.setToolTipText("Other Properties");
 		panelOther.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelOther.setBounds(262, 285, 366, 44);
+		panelOther.setBounds(638, 184, 242, 61);
 		panelProperties.add(panelOther);
 		panelOther.setLayout(null);
 		
 		txtDbName = new JTextField();
 		txtDbName.setColumns(10);
-		txtDbName.setBounds(110, 11, 151, 22);
+		txtDbName.setBounds(10, 31, 135, 22);
 		txtDbName.setText(HelpMe.databaseName);
 		panelOther.add(txtDbName);
 		
 		JLabel lblNam = new JLabel("Database Name");
 		lblNam.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNam.setBounds(10, 12, 90, 19);
+		lblNam.setBounds(10, 11, 90, 19);
 		panelOther.add(lblNam);
 		
 		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(279, 11, 77, 23);
+		btnUpdate.setBounds(155, 31, 77, 23);
 		panelOther.add(btnUpdate);
 		btnUpdate.setForeground(Color.BLACK);
 		btnUpdate.setBackground(SystemColor.activeCaption);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_2.setBounds(638, 285, 242, 147);
+		panel_2.setBounds(638, 26, 242, 147);
 		panelProperties.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -759,7 +712,7 @@ public class FrmMain extends JFrame {
 		
 		refreshStates();
 		refreshCompanies();
-		refreshUsers();
+//		refreshUsers();
 		
 	}
 
@@ -1081,13 +1034,13 @@ public class FrmMain extends JFrame {
 			}
 		});
 		
-		btnRefreshUsers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				refreshUsers();
-				lblPropertiesUsersStatus.setText("");
-				lblPropertiesCompStatus.setBackground(defaultBackColor);
-			}
-		});
+//		btnRefreshUsers.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				refreshUsers();
+//				lblPropertiesUsersStatus.setText("");
+//				lblPropertiesCompStatus.setBackground(defaultBackColor);
+//			}
+//		});
 		
 		btnAddNewState.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1186,66 +1139,66 @@ public class FrmMain extends JFrame {
 			}
 		});
 		
-		btnAddNewUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (txtUsersNewUser.getText().equals("")) {
-					lblPropertiesUsersStatus.setText(" Error : Username field should not be blank");
-					lblPropertiesUsersStatus.setBackground(Color.red);
-				} else {
-					FrmPassword passwordDialog = new FrmPassword(HelpMe.PasswordState.NEW, frame, txtUsersNewUser.getText());
-					passwordDialog.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-					passwordDialog.setVisible(true);
-					
-					passwordDialog.addWindowListener(new WindowListener(){
-						public void windowClosed(WindowEvent e) {
-							if (HelpMe.passwordUpdateStatus == 1) {
-								lblPropertiesUsersStatus.setText("Successfully added user : " + txtUsersNewUser.getText());
-								lblPropertiesUsersStatus.setBackground(Color.GREEN);
-								txtUsersNewUser.setText("");
-								refreshUsers();
-							}
-
-						}
-
-						@Override
-						public void windowOpened(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void windowClosing(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void windowIconified(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void windowDeiconified(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void windowActivated(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void windowDeactivated(WindowEvent e) {
-							// TODO Auto-generated method stub
-							
-						}});
-														
-				}
-			}
-		});
+//		btnAddNewUser.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (txtUsersNewUser.getText().equals("")) {
+//					lblPropertiesUsersStatus.setText(" Error : Username field should not be blank");
+//					lblPropertiesUsersStatus.setBackground(Color.red);
+//				} else {
+//					FrmPassword passwordDialog = new FrmPassword(HelpMe.PasswordState.NEW, frame, txtUsersNewUser.getText());
+//					passwordDialog.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//					passwordDialog.setVisible(true);
+//					
+//					passwordDialog.addWindowListener(new WindowListener(){
+//						public void windowClosed(WindowEvent e) {
+//							if (HelpMe.passwordUpdateStatus == 1) {
+//								lblPropertiesUsersStatus.setText("Successfully added user : " + txtUsersNewUser.getText());
+//								lblPropertiesUsersStatus.setBackground(Color.GREEN);
+//								txtUsersNewUser.setText("");
+//								refreshUsers();
+//							}
+//
+//						}
+//
+//						@Override
+//						public void windowOpened(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//
+//						@Override
+//						public void windowClosing(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//
+//						@Override
+//						public void windowIconified(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//
+//						@Override
+//						public void windowDeiconified(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//
+//						@Override
+//						public void windowActivated(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//
+//						@Override
+//						public void windowDeactivated(WindowEvent e) {
+//							// TODO Auto-generated method stub
+//							
+//						}});
+//														
+//				}
+//			}
+//		});
 		
 		btnDeleteState.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1296,31 +1249,31 @@ public class FrmMain extends JFrame {
 			}
 		});
 		
-		btnDeleteUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int answer = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to delete this record ?", "Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (answer == JOptionPane.YES_OPTION) {
-					SqlConnector sqlConnector = new SqlConnector(HelpMe.databaseName);
-					int deletionStatus;
-					
-					int position = rsJTUsers.getSelectedRow();
-					String user = rsJTUsers.getValueAt(position, 0).toString();
-					String sqlStatement = "Delete from Users where UserId = '" + user + "'";
-				
-					sqlConnector.connectToDatabase();
-					deletionStatus = sqlConnector.executeUpdateQuery(sqlStatement);
-					if (deletionStatus > 0) {
-						lblPropertiesUsersStatus.setText("Successfully deleted user : " + user);
-					} else {
-						lblPropertiesUsersStatus.setText("Could not delete the record.");
-					}
-					refreshUsers();
-					
-					if(sqlConnector.isConnectionOpen())
-						sqlConnector.closeConnection();
-				}
-			}
-		});
+//		btnDeleteUser.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				int answer = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to delete this record ?", "Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//				if (answer == JOptionPane.YES_OPTION) {
+//					SqlConnector sqlConnector = new SqlConnector(HelpMe.databaseName);
+//					int deletionStatus;
+//					
+//					int position = rsJTUsers.getSelectedRow();
+//					String user = rsJTUsers.getValueAt(position, 0).toString();
+//					String sqlStatement = "Delete from Users where UserId = '" + user + "'";
+//				
+//					sqlConnector.connectToDatabase();
+//					deletionStatus = sqlConnector.executeUpdateQuery(sqlStatement);
+//					if (deletionStatus > 0) {
+//						lblPropertiesUsersStatus.setText("Successfully deleted user : " + user);
+//					} else {
+//						lblPropertiesUsersStatus.setText("Could not delete the record.");
+//					}
+//					refreshUsers();
+//					
+//					if(sqlConnector.isConnectionOpen())
+//						sqlConnector.closeConnection();
+//				}
+//			}
+//		});
 		
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1423,41 +1376,28 @@ public class FrmMain extends JFrame {
 			sqlConnector.closeConnection();
 	}
 	
-	public void refreshUsers() {
-		SqlConnector sqlConnector = new SqlConnector(HelpMe.databaseName);
-		ResultSet rsUsers = null;
-		String sqlStatement;
-		
-		sqlStatement = "Select UserId From Users";
-		sqlConnector.connectToDatabase();
-		rsUsers = sqlConnector.executeResultSetQuery(sqlStatement);
-		
-		// populate table
-		if(usersScrollPane != null){
-			panelProperties.remove(usersScrollPane);
-		}
-		String[] columnNames = {"ID"};
-		try {
-			rsJTUsers = new ResultSetTable(rsUsers,columnNames);
-			rsJTUsers.populate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		lblPropertiesUsersStatus.setBackground(defaultBackColor);
-		
-		usersScrollPane = new JScrollPane(rsJTUsers);
-		usersScrollPane.setBounds(10, 108, 271, 127);
-		panelUsers.add(usersScrollPane);
-		
-		JButton btnChangePassword = new JButton("Refresh Table");
-		btnChangePassword.setForeground(Color.BLACK);
-		btnChangePassword.setBackground(SystemColor.activeCaption);
-		btnChangePassword.setBounds(12, 44, 105, 23);
-		panelUsers.add(btnChangePassword);
-		
-		if(sqlConnector.isConnectionOpen())
-			sqlConnector.closeConnection();
-	}
+//	public void refreshUsers() {
+//		SqlConnector sqlConnector = new SqlConnector(HelpMe.databaseName);
+//		ResultSet rsUsers = null;
+//		String sqlStatement;
+//		
+//		sqlStatement = "Select UserId From Users";
+//		sqlConnector.connectToDatabase();
+//		rsUsers = sqlConnector.executeResultSetQuery(sqlStatement);
+//		
+//		// populate table
+//		if(usersScrollPane != null){
+//			panelProperties.remove(usersScrollPane);
+//		}
+//		String[] columnNames = {"ID"};
+//		try {
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		if(sqlConnector.isConnectionOpen())
+//			sqlConnector.closeConnection();
+//	}
 	
 	public void fillUpdatePanel(ResultSet selectedRecord) {
 		try {
