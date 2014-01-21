@@ -657,7 +657,7 @@ public class FrmMain extends JFrame {
 		panelUsers = new JPanel();
 		panelUsers.setLayout(null);
 		panelUsers.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelUsers.setBounds(638, 26, 242, 257);
+		panelUsers.setBounds(638, 26, 291, 257);
 		panelProperties.add(panelUsers);
 		
 		txtUsersNewUser = new JTextField();
@@ -675,18 +675,18 @@ public class FrmMain extends JFrame {
 		btnRefreshUsers = new JButton("Refresh Table");
 		btnRefreshUsers.setForeground(Color.BLACK);
 		btnRefreshUsers.setBackground(SystemColor.activeCaption);
-		btnRefreshUsers.setBounds(10, 41, 105, 23);
+		btnRefreshUsers.setBounds(127, 44, 105, 23);
 		panelUsers.add(btnRefreshUsers);
 		
 		btnDeleteUser = new JButton("Delete User");
 		btnDeleteUser.setForeground(Color.RED);
 		btnDeleteUser.setBackground(Color.RED);
-		btnDeleteUser.setBounds(127, 41, 105, 23);
+		btnDeleteUser.setBounds(127, 74, 105, 23);
 		panelUsers.add(btnDeleteUser);
 		
 		lblPropertiesUsersStatus = new JLabel("");
 		lblPropertiesUsersStatus.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblPropertiesUsersStatus.setBounds(0, 241, 242, 16);
+		lblPropertiesUsersStatus.setBounds(0, 241, 291, 16);
 		panelUsers.add(lblPropertiesUsersStatus);
 		
 		JLabel lblUsers = new JLabel("Users");
@@ -728,7 +728,7 @@ public class FrmMain extends JFrame {
 		lblVisitsSolution.setIcon(new ImageIcon(FrmMain.class.getResource("/art/MapIcon.png")));
 		lblVisitsSolution.setForeground(new Color(255, 127, 80));
 		lblVisitsSolution.setFont(new Font("Baskerville Old Face", Font.BOLD, 16));
-		lblVisitsSolution.setBounds(58, 11, 143, 26);
+		lblVisitsSolution.setBounds(58, 11, 174, 26);
 		panel_2.add(lblVisitsSolution);
 		
 		JLabel lblAuthor = new JLabel("Author");
@@ -751,7 +751,7 @@ public class FrmMain extends JFrame {
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		textPane_1.setText(" 0.0.1.0 ");
+		textPane_1.setText(" 0.0.2.1 ");
 		textPane_1.setEditable(false);
 		textPane_1.setBackground(SystemColor.control);
 		textPane_1.setBounds(57, 107, 175, 20);
@@ -1446,8 +1446,14 @@ public class FrmMain extends JFrame {
 		lblPropertiesUsersStatus.setBackground(defaultBackColor);
 		
 		usersScrollPane = new JScrollPane(rsJTUsers);
-		usersScrollPane.setBounds(10, 75, 222, 160);
+		usersScrollPane.setBounds(10, 108, 271, 127);
 		panelUsers.add(usersScrollPane);
+		
+		JButton btnChangePassword = new JButton("Refresh Table");
+		btnChangePassword.setForeground(Color.BLACK);
+		btnChangePassword.setBackground(SystemColor.activeCaption);
+		btnChangePassword.setBounds(12, 44, 105, 23);
+		panelUsers.add(btnChangePassword);
 		
 		if(sqlConnector.isConnectionOpen())
 			sqlConnector.closeConnection();
