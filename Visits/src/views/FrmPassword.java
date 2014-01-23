@@ -19,8 +19,6 @@ import utilities.SqlConnector;
 
 import java.util.Arrays;
 
-
-
 public class FrmPassword extends JDialog {
 	private static final long serialVersionUID = -2126409026641211216L;
 	private JPasswordField txtNewPassword;
