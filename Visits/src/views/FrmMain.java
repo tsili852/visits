@@ -23,8 +23,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.Font;
@@ -111,8 +109,6 @@ public class FrmMain extends JFrame {
 	private JLabel lblPropertiesStatesStatus;
 	private JLabel lblPropertiesCompStatus;
 	static FrmMain frame;
-	private JTextField txtDbName;
-	private JButton btnUpdate;
 	private JTextPane txtDetailedDescription;
 	private JButton btnSearchUpdate;
 	private JPanel panelUpdate;
@@ -646,30 +642,6 @@ public class FrmMain extends JFrame {
 		lblCompanies.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblCompanies.setBounds(262, 7, 63, 19);
 		panelProperties.add(lblCompanies);
-		
-		JPanel panelOther = new JPanel();
-		panelOther.setToolTipText("Other Properties");
-		panelOther.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelOther.setBounds(638, 184, 242, 61);
-		panelProperties.add(panelOther);
-		panelOther.setLayout(null);
-		
-		txtDbName = new JTextField();
-		txtDbName.setColumns(10);
-		txtDbName.setBounds(10, 31, 135, 22);
-		txtDbName.setText(HelpMe.databaseName);
-		panelOther.add(txtDbName);
-		
-		JLabel lblNam = new JLabel("Database Name");
-		lblNam.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNam.setBounds(10, 11, 90, 19);
-		panelOther.add(lblNam);
-		
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(155, 31, 77, 23);
-		panelOther.add(btnUpdate);
-		btnUpdate.setForeground(Color.BLACK);
-		btnUpdate.setBackground(SystemColor.activeCaption);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -1275,21 +1247,6 @@ public class FrmMain extends JFrame {
 //			}
 //		});
 		
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (!(txtDbName.getText().equals(HelpMe.databaseName))) {
-					int answer = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to change the database name? \n(It might cause serious problems)", "Change database name", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-					if (answer == JOptionPane.YES_OPTION) {
-						HelpMe.updateProperty("DATABASE_NAME", txtDbName.getText());
-					}
-					else {
-						txtDbName.setText(HelpMe.databaseName);
-					}
-				}
-			}
-		});
-		
-
 	
 	}
 	
