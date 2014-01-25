@@ -172,7 +172,7 @@ public class FrmMain extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 944, 481);
-		tabbedPane.setBackground(SystemColor.window);
+		tabbedPane.setBackground(SystemColor.control);
 		contentPane.add(tabbedPane);
 
 		panelAdd = new JPanel();
