@@ -118,6 +118,7 @@ public class FrmMain extends JFrame {
 	private JTextField txtUpdateEmployee;
 	private JSpinner spnUpdateHours;
 	private JDateChooser updateDtChooser;
+	private JButton btnChangeEmployee;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -299,6 +300,12 @@ public class FrmMain extends JFrame {
 		lblStatus.setBounds(165, 72, 335, 18);
 		defaultBackColor = lblStatus.getBackground();
 		panelAdd.add(lblStatus);
+		
+		btnChangeEmployee = new JButton("Change");
+		btnChangeEmployee.setForeground(Color.BLACK);
+		btnChangeEmployee.setBackground(SystemColor.activeCaption);
+		btnChangeEmployee.setBounds(510, 10, 77, 23);
+		panelAdd.add(btnChangeEmployee);
 		
 		panelSearch = new JPanel();
 		tabbedPane.addTab("Search", new ImageIcon(FrmMain.class.getResource("/art/SearchIcon.png")), panelSearch, null);
@@ -694,6 +701,13 @@ public class FrmMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				clearAddComponents();
 				}
+		});
+		
+		btnChangeEmployee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtEmployee.setText("");
+				txtEmployee.setEditable(true);
+			}
 		});
 		
 		btnSave.addActionListener(new ActionListener() {
